@@ -147,13 +147,17 @@
       window.getComputedStyle(successMessage).display !== "none" &&
       successMessage.textContent.includes("E-mail address verified")
     ) {
-      const container = document.querySelector(".verificationControlContent");
-      const buttonsDiv = container?.querySelector("div.buttons");
+      const verificationContainer = document.getElementById("emailVerificationControl");
+      const buttonsDiv = verificationContainer?.querySelector("div.buttons");
 
       if (buttonsDiv) {
         buttonsDiv.remove();
-        console.log("Removed buttons div inside verificationControlContent.");
+        console.log("Removed buttons inside emailVerificationControl.");
+      } else {
+        console.log("buttons div not found inside emailVerificationControl.");
       }
+    } else {
+      console.log("Success message not visible or not found.");
     }
   });
 </script>
@@ -1111,6 +1115,7 @@
 </body>
 
 </html>
+
 
 
 
