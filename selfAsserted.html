@@ -150,6 +150,9 @@
       ) {
         if (buttonsDiv) {
           buttonsDiv.style.display = "none";
+          buttonsDiv.style.marginTop = "0";
+          buttonsDiv.style.paddingBottom = "0";
+          buttonsDiv.style.position = "static"; // optional, if layout shifts
         }
       }
     });
@@ -1108,6 +1111,7 @@
 </body>
 
 </html>
+
 
 
 
