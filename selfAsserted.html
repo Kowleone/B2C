@@ -141,29 +141,29 @@
     </style>
   
         <script>
-    window.addEventListener("load", () => {
-      const successMessage = document.getElementById("emailVerificationControl_success_message");
-  
-      if (
-        successMessage &&
-        window.getComputedStyle(successMessage).display !== "none" &&
-        successMessage.textContent.includes("E-mail address verified")
-      ) {
-        const buttonsDiv = document.querySelector(
-          "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-        );
-  
-        if (buttonsDiv) {
-          buttonsDiv.remove();
-          console.log("✅ Removed specific buttons div.");
-        } else {
-          console.log("⚠️ Specific buttons div not found.");
-        }
+  window.addEventListener("load", () => {
+    const successMessage = document.getElementById("emailVerificationControl_success_message");
+
+    if (
+      successMessage &&
+      window.getComputedStyle(successMessage).display !== "none" &&
+      successMessage.textContent.includes("E-mail address verified")
+    ) {
+      const buttonsDiv = document.querySelector(
+        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+      );
+
+      if (buttonsDiv) {
+        console.log("✅ Found buttons div:", buttonsDiv);
+        buttonsDiv.remove(); // or buttonsDiv.parentNode.removeChild(buttonsDiv);
       } else {
-        console.log("⚠️ Success message not visible or not found.");
+        console.warn("⚠️ Could not find buttons div with full selector.");
       }
-    });
-  </script>
+    } else {
+      console.warn("⚠️ Success message not visible or not found.");
+    }
+  });
+</script>
 
 
 
@@ -1117,6 +1117,7 @@
 </body>
 
 </html>
+
 
 
 
