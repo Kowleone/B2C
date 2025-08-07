@@ -139,9 +139,10 @@
     }
     
     </style>
+
   
-        <script>
-  window.addEventListener("load", () => {
+  <script>
+  setTimeout(() => {
     const successMessage = document.getElementById("emailVerificationControl_success_message");
 
     if (
@@ -149,21 +150,15 @@
       window.getComputedStyle(successMessage).display !== "none" &&
       successMessage.textContent.includes("E-mail address verified")
     ) {
-      const style = document.createElement("style");
-      style.textContent = `
-        #attributeList ul li .attrEntry .verificationControlContent .buttons {
-          display: none !important;
-          visibility: hidden !important;
-          height: 0 !important;
-          overflow: hidden !important;
-        }
-      `;
-      document.head.appendChild(style);
-      console.log("✅ CSS injected to hide buttons.");
-    } else {
-      console.log("⚠️ Success message not visible or not matched.");
+      const buttonsDiv = document.querySelector(
+        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+      );
+
+      if (buttonsDiv) {
+        buttonsDiv.style.setProperty("display", "none", "important");
+      }
     }
-  });
+  }, 500);
 </script>
 
   
@@ -1117,6 +1112,7 @@
 </body>
 
 </html>
+
 
 
 
