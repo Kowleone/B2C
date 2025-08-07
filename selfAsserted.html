@@ -142,7 +142,7 @@
 
   
  <script>
-  const observer = new MutationObserver(() => {
+  setTimeout(() => {
     const successMessage = document.getElementById("emailVerificationControl_success_message");
 
     if (
@@ -156,19 +156,10 @@
 
       if (buttonsDiv) {
         buttonsDiv.style.setProperty("display", "none", "important");
-        observer.disconnect();
       }
     }
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    characterData: true
-  });
+  }, 10000); // 10 seconds
 </script>
-
 
   <style id="idpselector">
     #SignInWithLogonNameExchange,
@@ -1120,6 +1111,7 @@
 </body>
 
 </html>
+
 
 
 
