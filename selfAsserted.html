@@ -138,23 +138,19 @@
     margin-bottom: 10px;
     }
 
-    <script>
-  const observer = new MutationObserver(() => {
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
     const successMessage = document.getElementById("emailVerificationControl_success_message");
     const buttonsDiv = document.querySelector("div.buttons");
 
     if (
       successMessage &&
-      successMessage.style.display !== "none" &&
       successMessage.textContent.includes("E-mail address verified") &&
       buttonsDiv
     ) {
       buttonsDiv.remove();
-      observer.disconnect(); // stop observing once done
     }
   });
-
-  observer.observe(document.body, { childList: true, subtree: true });
 </script>
 
   </style>
@@ -1110,6 +1106,7 @@
 </body>
 
 </html>
+
 
 
 
