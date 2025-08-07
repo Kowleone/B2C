@@ -138,43 +138,25 @@
     margin-bottom: 10px;
     }
 
-   <script>
-  window.onload = function () {
-    function checkAndRemoveScopedButtons() {
-      const successMessage = document.getElementById("emailVerificationControl_success_message");
+<script>
+  window.addEventListener("load", () => {
+    const successMessage = document.getElementById("emailVerificationControl_success_message");
 
-      if (
-        successMessage &&
-        window.getComputedStyle(successMessage).display !== "none" &&
-        successMessage.textContent.includes("E-mail address verified")
-      ) {
-        const container = successMessage.closest("div");
-        const scopedButtons = container?.querySelector("div.buttons");
+    if (
+      successMessage &&
+      window.getComputedStyle(successMessage).display !== "none" &&
+      successMessage.textContent.includes("E-mail address verified")
+    ) {
+      const container = document.querySelector(".verificationControlContent");
+      const buttonsDiv = container?.querySelector("div.buttons");
 
-        if (scopedButtons) {
-          scopedButtons.remove();
-          return true;
-        }
+      if (buttonsDiv) {
+        buttonsDiv.remove();
+        console.log("Removed buttons div inside verificationControlContent.");
       }
-      return false;
     }
-
-    if (!checkAndRemoveScopedButtons()) {
-      const observer = new MutationObserver(() => {
-        if (checkAndRemoveScopedButtons()) {
-          observer.disconnect();
-        }
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        characterData: true
-      });
-    }
-  };
+  });
 </script>
-
 
   </style>
 
@@ -1129,6 +1111,7 @@
 </body>
 
 </html>
+
 
 
 
