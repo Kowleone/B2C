@@ -141,35 +141,32 @@
     </style>
 
   
-  <script>
-  const target = document.getElementById("emailVerificationControl");
+ <script>
+  const observer = new MutationObserver(() => {
+    const successMessage = document.getElementById("emailVerificationControl_success_message");
 
-  if (target) {
-    const observer = new MutationObserver(() => {
-      const successMessage = document.getElementById("emailVerificationControl_success_message");
+    if (
+      successMessage &&
+      window.getComputedStyle(successMessage).display !== "none" &&
+      successMessage.textContent.includes("E-mail address verified")
+    ) {
+      const buttonsDiv = document.querySelector(
+        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+      );
 
-      if (
-        successMessage &&
-        window.getComputedStyle(successMessage).display !== "none" &&
-        successMessage.textContent.includes("E-mail address verified")
-      ) {
-        const buttonsDiv = document.querySelector(
-          "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-        );
-
-        if (buttonsDiv) {
-          buttonsDiv.style.setProperty("display", "none", "important");
-          observer.disconnect(); // stop watching once done
-        }
+      if (buttonsDiv) {
+        buttonsDiv.style.setProperty("display", "none", "important");
+        observer.disconnect();
       }
-    });
+    }
+  });
 
-    observer.observe(target, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
-  }
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    characterData: true
+  });
 </script>
 
 
@@ -1123,6 +1120,7 @@
 </body>
 
 </html>
+
 
 
 
