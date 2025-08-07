@@ -139,17 +139,25 @@
     }
 
    <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  const observer = new MutationObserver(() => {
     const successMessage = document.getElementById("emailVerificationControl_success_message");
     const buttonsDiv = document.querySelector("div.buttons");
 
     if (
       successMessage &&
+      window.getComputedStyle(successMessage).display !== "none" &&
       successMessage.textContent.includes("E-mail address verified") &&
       buttonsDiv
     ) {
       buttonsDiv.remove();
+      observer.disconnect(); // stop observing once done
     }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true // watches for text changes
   });
 </script>
 
@@ -1106,6 +1114,7 @@
 </body>
 
 </html>
+
 
 
 
