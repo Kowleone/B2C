@@ -139,41 +139,42 @@
     }
 
    <script>
-  function checkAndRemoveScopedButtons() {
-    const successMessage = document.getElementById("emailVerificationControl_success_message");
+  window.onload = function () {
+    function checkAndRemoveScopedButtons() {
+      const successMessage = document.getElementById("emailVerificationControl_success_message");
 
-    if (
-      successMessage &&
-      window.getComputedStyle(successMessage).display !== "none" &&
-      successMessage.textContent.includes("E-mail address verified")
-    ) {
-      // Find the closest container and remove only its buttons
-      const container = successMessage.closest("div");
-      const scopedButtons = container?.querySelector("div.buttons");
+      if (
+        successMessage &&
+        window.getComputedStyle(successMessage).display !== "none" &&
+        successMessage.textContent.includes("E-mail address verified")
+      ) {
+        const container = successMessage.closest("div");
+        const scopedButtons = container?.querySelector("div.buttons");
 
-      if (scopedButtons) {
-        scopedButtons.remove();
-        return true;
+        if (scopedButtons) {
+          scopedButtons.remove();
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
 
-  // Run immediately on page load
-  if (!checkAndRemoveScopedButtons()) {
-    const observer = new MutationObserver(() => {
-      if (checkAndRemoveScopedButtons()) {
-        observer.disconnect();
-      }
-    });
+    if (!checkAndRemoveScopedButtons()) {
+      const observer = new MutationObserver(() => {
+        if (checkAndRemoveScopedButtons()) {
+          observer.disconnect();
+        }
+      });
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
-  }
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
+  };
 </script>
+
 
   </style>
 
@@ -1128,6 +1129,7 @@
 </body>
 
 </html>
+
 
 
 
