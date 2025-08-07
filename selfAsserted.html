@@ -142,26 +142,37 @@
 
   
   <script>
-  setTimeout(() => {
-    const successMessage = document.getElementById("emailVerificationControl_success_message");
+  const target = document.getElementById("emailVerificationControl");
 
-    if (
-      successMessage &&
-      window.getComputedStyle(successMessage).display !== "none" &&
-      successMessage.textContent.includes("E-mail address verified")
-    ) {
-      const buttonsDiv = document.querySelector(
-        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-      );
+  if (target) {
+    const observer = new MutationObserver(() => {
+      const successMessage = document.getElementById("emailVerificationControl_success_message");
 
-      if (buttonsDiv) {
-        buttonsDiv.style.setProperty("display", "none", "important");
+      if (
+        successMessage &&
+        window.getComputedStyle(successMessage).display !== "none" &&
+        successMessage.textContent.includes("E-mail address verified")
+      ) {
+        const buttonsDiv = document.querySelector(
+          "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+        );
+
+        if (buttonsDiv) {
+          buttonsDiv.style.setProperty("display", "none", "important");
+          observer.disconnect(); // stop watching once done
+        }
       }
-    }
-  }, 1000);
+    });
+
+    observer.observe(target, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
 </script>
 
-  
+
   <style id="idpselector">
     #SignInWithLogonNameExchange,
     #SignUpWithLogonEmailExchange,
@@ -1112,6 +1123,7 @@
 </body>
 
 </html>
+
 
 
 
