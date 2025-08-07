@@ -5,6 +5,34 @@
 
   <title>User details</title>
 
+  <script>
+  const observer = new MutationObserver(() => {
+    const successMessage = document.getElementById("emailVerificationControl_success_message");
+
+    if (
+      successMessage &&
+      window.getComputedStyle(successMessage).display !== "none" &&
+      successMessage.textContent.includes("E-mail address verified")
+    ) {
+      const buttonsDiv = document.querySelector(
+        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+      );
+
+      if (buttonsDiv) {
+        buttonsDiv.style.setProperty("display", "none", "important");
+        observer.disconnect(); // Stop watching once it's done
+      }
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    characterData: true
+  });
+</script>
+
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -139,27 +167,6 @@
     }
     
     </style>
-
-  
- <script>
-  setTimeout(() => {
-    const successMessage = document.getElementById("emailVerificationControl_success_message");
-
-    if (
-      successMessage &&
-      window.getComputedStyle(successMessage).display !== "none" &&
-      successMessage.textContent.includes("E-mail address verified")
-    ) {
-      const buttonsDiv = document.querySelector(
-        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-      );
-
-      if (buttonsDiv) {
-        buttonsDiv.style.setProperty("display", "none", "important");
-      }
-    }
-  }, 10000); // 10 seconds
-</script>
 
   <style id="idpselector">
     #SignInWithLogonNameExchange,
@@ -1111,6 +1118,7 @@
 </body>
 
 </html>
+
 
 
 
