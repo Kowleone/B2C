@@ -140,29 +140,32 @@
     
     </style>
   
-    <script>
-      window.addEventListener("load", () => {
-        const successMessage = document.getElementById("emailVerificationControl_success_message");
-    
-        if (
-          successMessage &&
-          window.getComputedStyle(successMessage).display !== "none" &&
-          successMessage.textContent.includes("E-mail address verified")
-        ) {
-          const verificationContainer = document.getElementById("emailVerificationControl");
-          const buttonsDiv = verificationContainer?.querySelector("div.buttons");
-    
-          if (buttonsDiv) {
-            buttonsDiv.remove();
-            console.log("Removed buttons inside emailVerificationControl.");
-          } else {
-            console.log("buttons div not found inside emailVerificationControl.");
-          }
+        <script>
+    window.addEventListener("load", () => {
+      const successMessage = document.getElementById("emailVerificationControl_success_message");
+  
+      if (
+        successMessage &&
+        window.getComputedStyle(successMessage).display !== "none" &&
+        successMessage.textContent.includes("E-mail address verified")
+      ) {
+        const buttonsDiv = document.querySelector(
+          "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+        );
+  
+        if (buttonsDiv) {
+          buttonsDiv.remove();
+          console.log("✅ Removed specific buttons div.");
         } else {
-          console.log("Success message not visible or not found.");
+          console.log("⚠️ Specific buttons div not found.");
         }
-      });
-    </script>
+      } else {
+        console.log("⚠️ Success message not visible or not found.");
+      }
+    });
+  </script>
+
+
 
   <style id="idpselector">
     #SignInWithLogonNameExchange,
@@ -1114,6 +1117,7 @@
 </body>
 
 </html>
+
 
 
 
