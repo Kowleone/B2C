@@ -149,24 +149,21 @@
       window.getComputedStyle(successMessage).display !== "none" &&
       successMessage.textContent.includes("E-mail address verified")
     ) {
-      const buttonsDiv = document.querySelector(
-        "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-      );
-
-      if (buttonsDiv) {
-        console.log("✅ Found buttons div:", buttonsDiv);
-        buttonsDiv.remove(); // or buttonsDiv.parentNode.removeChild(buttonsDiv);
-      } else {
-        console.warn("⚠️ Could not find buttons div with full selector.");
-      }
+      const style = document.createElement("style");
+      style.textContent = `
+        #attributeList ul li .attrEntry .verificationControlContent .buttons {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+      console.log("✅ CSS injected to hide buttons.");
     } else {
-      console.warn("⚠️ Success message not visible or not found.");
+      console.log("⚠️ Success message not visible or not matched.");
     }
   });
 </script>
 
-
-
+  
   <style id="idpselector">
     #SignInWithLogonNameExchange,
     #SignUpWithLogonEmailExchange,
@@ -1117,6 +1114,7 @@
 </body>
 
 </html>
+
 
 
 
