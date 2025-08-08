@@ -5,36 +5,6 @@
 
   <title>User details</title>
 
-  <script>
-  function waitForVerification(attempts = 0) {
-    const successMessage = document.getElementById("emailVerificationControl_success_message");
-    const buttonsDiv = document.querySelector(
-      "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-    );
-
-    const isVerified =
-      successMessage &&
-      window.getComputedStyle(successMessage).display !== "none" &&
-      successMessage.textContent.includes("E-mail address verified");
-
-    if (isVerified && buttonsDiv) {
-      console.log("Verified — hiding buttons");
-      buttonsDiv.style.setProperty("display", "none", "important");
-      return;
-    }
-
-    if (attempts < 100) {
-      setTimeout(() => waitForVerification(attempts + 1), 300); // Retry every 300ms
-    } else {
-      console.warn("Gave up after 30 seconds");
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    waitForVerification();
-  });
-</script>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1122,9 +1092,39 @@
       </div>
     </div>
   </div>
-</body>
+<script>
+  function waitForVerification(attempts = 0) {
+    const successMessage = document.getElementById("emailVerificationControl_success_message");
+    const buttonsDiv = document.querySelector(
+      "#attributeList ul li .attrEntry .verificationControlContent .buttons"
+    );
 
+    const isVerified =
+      successMessage &&
+      window.getComputedStyle(successMessage).display !== "none" &&
+      successMessage.textContent.includes("E-mail address verified");
+
+    if (isVerified && buttonsDiv) {
+      console.log("Verified — hiding buttons");
+      buttonsDiv.style.setProperty("display", "none", "important");
+      return;
+    }
+
+    if (attempts < 100) {
+      setTimeout(() => waitForVerification(attempts + 1), 300); // Retry every 300ms
+    } else {
+      console.warn("Gave up after 30 seconds");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    waitForVerification();
+  });
+</script>
+  
+</body>
 </html>
+
 
 
 
