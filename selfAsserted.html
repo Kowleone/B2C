@@ -5,32 +5,6 @@
 
   <title>User details</title>
 
-  <script>
-  const observer = new MutationObserver(() => {
-    const successMessage = document.getElementById("emailVerificationControl_success_message");
-    const buttonsDiv = document.querySelector(
-      "#attributeList ul li .attrEntry .verificationControlContent .buttons"
-    );
-
-    if (
-      successMessage &&
-      window.getComputedStyle(successMessage).display !== "none" &&
-      successMessage.textContent.includes("E-mail address verified") &&
-      buttonsDiv
-    ) {
-      buttonsDiv.style.setProperty("display", "none", "important");
-      observer.disconnect();
-    }
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    characterData: true
-  });
-</script>
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,7 +137,13 @@
     box-sizing: border-box;
     margin-bottom: 10px;
     }
-    
+
+    #attributeList ul li .attrEntry .verificationControlContent .buttons {
+    margin-top: 2rem;
+    padding: 0; /* Removes all padding */
+    position: relative;
+    }
+
     </style>
 
   <style id="idpselector">
@@ -1116,6 +1096,7 @@
 </body>
 
 </html>
+
 
 
 
